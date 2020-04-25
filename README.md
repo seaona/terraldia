@@ -8,8 +8,8 @@ Aquest projecte es nutreix de l'API facilitada per la Generalitat de Catalunya i
 ## Codi Obert
 El codi és accessible per a tothom i pot ser re-utilitzat sota la llicència MIT. Fàcilment es pot fer la implementació per a d'altres municipis.
 ## Pròximes Funcionalitats
-- Error Handling en la validació dels inputs
-- Refactorització del codi 
-- Visualització de dades acumulades
-- Comparativa amb dades de demografia de Terrassa
+- [ ] Error Handling en la validació dels inputs
+- [ ] Refactorització del codi 
+- [ ] Visualització de dades acumulades
+- [ ] Comparativa amb dades de demografia de Terrassa
 

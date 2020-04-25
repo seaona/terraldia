@@ -714,7 +714,7 @@ Responsive media queries
     .ser-text {
     font-size: 20px;
     }
-    .service-box, .feature-info, .orga-stru{
+    .service-box, .feature-info, .orga-stru, .orga-stru-yellow{
         margin-bottom: 30px;
     }
     .pricing-head .amount {
@@ -772,6 +772,21 @@ Responsive media queries
     .orga-stru p {
     font-size: 13px;
     }
+    .orga-stru-yellow i {
+    font-size: 92px;
+    }
+    .orga-stru-yellow {
+    padding: 5px 5px 15px 5px;
+    width: 75px;
+    margin-bottom: 20px;
+    }
+    .orga-stru-yellow h3 {
+    font-size: 28px;
+    }
+    .orga-stru-yellow p {
+    font-size: 13px;
+    }
+
     h3.det-txt {
     font-size: 28px;
     }

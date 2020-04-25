@@ -7,7 +7,10 @@ Aquest projecte és una iniciativa personal motivada per les ganes d'aportar el 
 Aquest projecte es nutreix de l'API facilitada per la Generalitat de Catalunya i les dades provenen del registre RSAcovid19 del Dept. de Salut
 ## Codi Obert
 El codi és accessible per a tothom i pot ser re-utilitzat sota la llicència MIT. Fàcilment es pot fer la implementació per a d'altres municipis.
-## Pròximes Funcionalitats
+## Funcionalitats
+- [x] Agafar dades més recents de l'API oberta
+- [x] Búsqueda específica per data
+- [ ] Error Handling en la validació dels inputs
 - [ ] Error Handling en la validació dels inputs
 - [ ] Refactorització del codi 
 - [ ] Visualització de dades acumulades

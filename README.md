@@ -24,7 +24,7 @@ El codi és accessible per a tothom i pot ser re-utilitzat sota la llicència MI
 
 2. Fes cd a la carpeta i instal·la les dependències
 
-```git clone https://github.com/seaona/terraldia.git```
+```npm install```
 
 3. Crea un arxiu (dins Terrassa) anomenat .env i afegeix el localhost on vulguis que s'inicii el servidor, dins l'arxiu. Per exemple, pots copiar i enganxar el següent:
 

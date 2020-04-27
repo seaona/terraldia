@@ -34,6 +34,8 @@ El codi és accessible per a tothom i pot ser re-utilitzat sota la llicència MI
 
 ```npm run start```
 
+5. Si el servidor s'ha iniciat correctament, veuràs un missatge a la consola del Terminal. Ara pots obrir un navegador i anar a l'adreça http://localhost:8080 per a veure el projecte. 
+
 ### Modifica la font de dades
 1. Dins de l'arxiu index.js trobaràs tota la lògica de l'aplicació. A l'inici es defineixen les URLs per obtenir les dades de Terrassa. Observa que n'hi ha vàries, ja que Terrassa està dividida en 6 zones (TerrassaA - ... TerrassaF). Canvia les URLs per les del teu municipi (pot ser que n'hi hagi una o vàries).
 

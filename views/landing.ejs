@@ -125,14 +125,16 @@
 
   //Total Positius
   var data1 = [
-     {ser1: 1, ser2: 4},
-     {ser1: 2, ser2: 16},
-     {ser1: 3, ser2: 8},
-     {ser1: 4, ser2: 12},
-     {ser1: 5, ser2: 32},
-     {ser1: 6, ser2: 16},
-     {ser1: 7, ser2: 8},
-     {ser1: 8, ser2: 12},
+     /*{ser1: 1-May-12, ser2: 4},
+     {ser1: 30-Apr-12, ser2: 16},
+     {ser1: 27-Apr-12, ser2: 8},
+     {ser1: 26-Apr-12, ser2: 12}*/
+     
+     {ser1: 5, ser2: 32, date: "1-Ag"},
+     {ser1: 6, ser2: 16, date: "2-Ag"},
+     {ser1: 7, ser2: 8, date: "3-Ag"}
+
+     /*{ser1: 8, ser2: 12},
      {ser1: 9, ser2: 32},
      {ser1: 10, ser2: 16},
      {ser1: 11, ser2: 8},
@@ -142,7 +144,7 @@
      {ser1: 15, ser2: 18},
      {ser1: 16, ser2: 32},
      {ser1: 17, ser2: 27},
-     {ser1: 18, ser2: 13}
+     {ser1: 18, ser2: 13}*/
   ];
   
   //Total Sospitosos
@@ -160,13 +162,15 @@
      {ser1: 6, ser2: 8}
   ];
 
+  //Colors línia gràfic
   var color1 = "#f04d43"; //vermell
   var color2= "#fdba13"; //taronja
   
-  // set the dimensions and margins of the graph
+  // Tamany i Marges del Gràfic
   var margin = {top: 10, right: 30, bottom: 30, left: 50},
       width = 700 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
+  
   
   // append the svg object to the body of the page
   var svg = d3.select("#grafic")
@@ -186,6 +190,9 @@
     .style("font-size", "12px")
     .style("font-family", "sans-serif")
 
+    
+    
+
   
   // Initialize an Y axis
   var y = d3.scaleLinear().range([height, 0]);
@@ -199,13 +206,18 @@
   function update(data, color) {
   
     // Create the X axis:
-    x.domain([0, d3.max(data, function(d) { return d.ser1 }) ]);
-    svg.selectAll(".myXaxis").transition()
+    x.domain([data[0].ser1, data[data.length - 1].ser1]);
+
+    svg.selectAll(".myXaxis")
+      .transition()
       .duration(3000)
-      .call(xAxis);
+      .call(xAxis)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("transform", "rotate(-65)");
   
     // create the Y axis
-    y.domain([0, d3.max(data, function(d) { return d.ser2  }) ]);
+    y.domain([0, d3.max(data, function(d) {return d.ser2})+5]);
     svg.selectAll(".myYaxis")
       .transition()
       .duration(3000)

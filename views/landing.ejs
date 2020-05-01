@@ -85,13 +85,158 @@
           </hgroup>
           <p class="det-p"><b>Positius:</b> han donat positiu en alguna prova diagnòstica (PCR o test ràpid).</p>
           <p class="det-p"><b>Sospitosos:</b> han presentat símptomes i un professional sanitari els ha classificat com a possible cas, però no tenen prova diagnòstica.</p>
-
         </div>
       </div>
     </div>
   </div>
 </section>
 <!--/ Dades-->
+
+<!--Gràfic-->
+<section id="organisations" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        
+        <!-- Botons Gràfic -->
+        <button class="btn" onclick="update(data1, color1)">Total Positius</button>
+        <button class="btn" onclick="update(data2, color2)">Total Sospitosos</button>
+
+        <div id="grafic"></div>
+      </div>
+      <div class="col-md-4">
+        <div class="detail-info">
+          <hgroup>
+            <h3 class="det-txt">Registres de Positius per Dia</h3>
+            <h4 class="sm-txt">Última Actualització: <%= data%></h4>
+          </hgroup>
+          <p class="det-p"><b>Positius:</b> han donat positiu en alguna prova diagnòstica (PCR o test ràpid).</p>
+          <p class="det-p"><b>Sospitosos:</b> han presentat símptomes i un professional sanitari els ha classificat com a possible cas, però no tenen prova diagnòstica.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Gràfic-->
+
+<!-- Gràfic Script-->
+<script>
+
+  //Total Positius
+  var data1 = [
+     {ser1: 1, ser2: 4},
+     {ser1: 2, ser2: 16},
+     {ser1: 3, ser2: 8},
+     {ser1: 4, ser2: 12},
+     {ser1: 5, ser2: 32},
+     {ser1: 6, ser2: 16},
+     {ser1: 7, ser2: 8},
+     {ser1: 8, ser2: 12},
+     {ser1: 9, ser2: 32},
+     {ser1: 10, ser2: 16},
+     {ser1: 11, ser2: 8},
+     {ser1: 12, ser2: 12},
+     {ser1: 13, ser2: 22},
+     {ser1: 14, ser2: 6},
+     {ser1: 15, ser2: 18},
+     {ser1: 16, ser2: 32},
+     {ser1: 17, ser2: 27},
+     {ser1: 18, ser2: 13}
+  ];
+  
+  //Total Sospitosos
+  var data2 = [
+     {ser1: 1, ser2: 7},
+     {ser1: 4, ser2: 1},
+     {ser1: 1, ser2: 7},
+     {ser1: 4, ser2: 1},
+     {ser1: 1, ser2: 7},
+     {ser1: 4, ser2: 1},
+     {ser1: 1, ser2: 7},
+     {ser1: 4, ser2: 1},
+     {ser1: 1, ser2: 7},
+     {ser1: 4, ser2: 1},
+     {ser1: 6, ser2: 8}
+  ];
+
+  var color1 = "#f04d43"; //vermell
+  var color2= "#fdba13"; //taronja
+  
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 30, bottom: 30, left: 50},
+      width = 700 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+  
+  // append the svg object to the body of the page
+  var svg = d3.select("#grafic")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+  
+  // Initialise a X axis:
+  var x = d3.scaleLinear().range([0,width]);
+  var xAxis = d3.axisBottom().scale(x);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .attr("class","myXaxis")
+    .style("font-size", "12px")
+    .style("font-family", "sans-serif")
+
+  
+  // Initialize an Y axis
+  var y = d3.scaleLinear().range([height, 0]);
+  var yAxis = d3.axisLeft().scale(y);
+  svg.append("g")
+    .attr("class","myYaxis")
+    .style("font-size", "12px")
+    .style("font-family", "sans-serif")
+  
+  // Create a function that takes a dataset as input and update the plot:
+  function update(data, color) {
+  
+    // Create the X axis:
+    x.domain([0, d3.max(data, function(d) { return d.ser1 }) ]);
+    svg.selectAll(".myXaxis").transition()
+      .duration(3000)
+      .call(xAxis);
+  
+    // create the Y axis
+    y.domain([0, d3.max(data, function(d) { return d.ser2  }) ]);
+    svg.selectAll(".myYaxis")
+      .transition()
+      .duration(3000)
+      .call(yAxis);
+  
+    // Create a update selection: bind to the new data
+    var u = svg.selectAll(".lineTest")
+      .data([data], function(d){ return d.ser1 });
+  
+    // Updata the line
+    u
+      .enter()
+      .append("path")
+      .attr("class","lineTest")
+      .merge(u)
+      .transition()
+      .duration(3000)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.ser1); })
+        .y(function(d) { return y(d.ser2); }))
+        .attr("fill", "none")
+        .attr("stroke", color)
+        .attr("stroke-width", 2.5)
+  }
+  
+  // At the beginning, I run the update function on the first dataset:
+  update(data1, color1)
+  
+  </script>
+
+<!-- Gràfic Script -->
 
 <!--Projecte-->
 <section id="feature" class="section-padding">

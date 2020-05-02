@@ -10,10 +10,10 @@ El codi és accessible per a tothom i pot ser re-utilitzat sota la llicència MI
 ## Funcionalitats
 - [x] Agafar dades més recents de l'API oberta
 - [x] Búsqueda específica per data
-- [ ] Error Handling en la validació dels inputs
+- [ ] Calendari per introduir data
 - [ ] Error Handling en la validació dels inputs
 - [ ] Refactorització del codi 
-- [ ] Visualització de dades acumulades
+- [ ] Visualització de dades al llarg del temps
 - [ ] Comparativa amb dades de demografia de Terrassa
 
 ## Implementació per al teu Municipi

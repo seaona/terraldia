@@ -577,6 +577,7 @@ Contact Us
 #sendmessage.show, #errormessage.show, .show {
 	display:block;
 }
+
 /***********************************
 Footer
 ************************************/
@@ -683,6 +684,9 @@ Footer
 }
 .btn {
     padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
 }
 .light-form-button{
     background: #f04d43;

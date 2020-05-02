@@ -28,7 +28,8 @@ router.get("/", function(req,res){
   
     //Data 
     var data = new Date();
-    var dd = String(data.getDate()).padStart(2, '0')-2;
+    data.setDate(data.getDate()-2);
+    var dd = String(data.getDate()).padStart(2, '0');
     var mm = String(data.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = data.getFullYear();
     

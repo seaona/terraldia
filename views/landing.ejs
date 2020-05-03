@@ -109,7 +109,9 @@
       <div class="col-md-8">      
         <button class="btn" onclick="update(data1, color1)">Total Positius</button>
         <button class="btn" onclick="update(data2, color2)">Total Sospitosos</button>
-        <div id="grafic"></div>
+        <div class="grafic">
+          <div id="grafic"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -166,13 +168,15 @@
   var margin = {top: 10, right: 30, bottom: 30, left: 50},
       width = 700 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
-  
+
+      //viewBox="0 0 700 400"
   
   // append the svg object to the body of the page
   var svg = d3.select("#grafic")
     .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      //.attr("width", width + margin.left + margin.right)
+      //.attr("height", height + margin.top + margin.bottom)
+      .attr("viewBox", "0 0 700 400") //per fer el re-sizing automaticament en mobils
     .append("g")
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");

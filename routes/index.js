@@ -32,11 +32,11 @@ router.get("/", function(req,res){
     var dd = String(data.getDate()).padStart(2, '0');
     var mm = String(data.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = data.getFullYear();
-    
     data = dd + '-' + mm + '-' + yyyy;
     dataAPI = yyyy + '-' + mm + '-' + dd + 'T00:00:00.000';
     
     getApiData();
+    emplenarGrafic();
     
     async function getApiData(){
 
@@ -44,11 +44,30 @@ router.get("/", function(req,res){
       totalSospitososDones = await getTotalSospitososDones();
       totalPositiusHomes = await getTotalPositiusHomes();
       totalSospitososHomes = await getTotalSospitososHomes();
-
       res.render("landing", {data: data, totalPositiusDones: totalPositiusDones, totalSospitososDones: totalSospitososDones, totalPositiusHomes: totalPositiusHomes, totalSospitososHomes: totalSospitososHomes});
     }
   
 
+    async function emplenarGrafic(){
+      const inici = new Date("March 03, 2020 03:24:00") //YY MM DD 
+      const avui = new Date();
+      avui.setDate(avui.getDate()-2);
+      var data = avui;
+      const diferencia = parseInt((avui - inici) / (1000 * 60 * 60 * 24), 10);
+      const datasetPositius = {"data": "", positius: ""};
+      const datasetSospitosos = {data: "", sospitosos: ""};
+
+      for(var i=0; i<diferencia; i++){
+        data = avui.setDate(avui.getDate()-2-i);
+        totalPositius = await getTotalPositiusDones(data) + await getTotalPositiusHomes(data);
+        totalSospitosos = await getTotalSospitososDones(data) + await getTotalSospitososHomes(data);
+        
+        datasetPositius.append({data:data, positius:totalPositius});
+
+      }
+      
+    }
+ 
     
 
     //TOTALS: Positius Dones

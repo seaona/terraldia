@@ -1,6 +1,9 @@
-# Terrass Al Dia
+# Terrassa Al Dia
 ## Projecte
 Aquest és un projecte sense ànim de lucre, amb l'objectiu de mantenir els egarencs i les egarenques informats sobre l'estat del COVID-19 en relació a la ciutat. 
+
+https://terrassa-al-dia.herokuapp.com/
+
 ## Motivació
 Aquest projecte és una iniciativa personal motivada per les ganes d'aportar el meu granet de sorra en la situació excepcional que estem vivint.
 ## Font de Dades

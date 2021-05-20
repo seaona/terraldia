@@ -1,21 +1,14 @@
-//MODULE DEPENDENCIES
 const express = require("express");
 const router = express.Router();
-const request = require("request");
 
+const { fetchData } = require("../handlers/apiData");
 
-//API INTERACTION: Registre de test de COVID-19 realitzats a Catalunya
-const TerrassaA = 'https://analisi.transparenciacatalunya.cat/resource/xuwf-dxjd.json?absdescripcio=Terrassa A';
-const TerrassaB = 'https://analisi.transparenciacatalunya.cat/resource/xuwf-dxjd.json?absdescripcio=Terrassa B';
-const TerrassaC = 'https://analisi.transparenciacatalunya.cat/resource/xuwf-dxjd.json?absdescripcio=Terrassa C';
-const TerrassaD = 'https://analisi.transparenciacatalunya.cat/resource/xuwf-dxjd.json?absdescripcio=Terrassa D';
-const TerrassaE = 'https://analisi.transparenciacatalunya.cat/resource/xuwf-dxjd.json?absdescripcio=Terrassa E';
-const TerrassaF = 'https://analisi.transparenciacatalunya.cat/resource/xuwf-dxjd.json?absdescripcio=Terrassa F';
-
-const districtsUrls = [TerrassaA, TerrassaB, TerrassaC, TerrassaD, TerrassaE, TerrassaF];
 
 //ROUTES
-router.get("/", function(req,res){
+router.get("/", (req,res) => {
+  fetchData
+  res.render("landing", {data: data, totalPositiusDones: totalPositiusDones, totalSospitososDones: totalSospitososDones, totalPositiusHomes: totalPositiusHomes, totalSospitososHomes: totalSospitososHomes});
+})
 
   //TOTALS: Variables Totals Terrassa
   var totalPositiusDones = 0;
@@ -23,8 +16,25 @@ router.get("/", function(req,res){
   var totalPositiusHomes = 0;
   var totalSospitososHomes = 0;
   
+  // Totals Positius Dones
+  let dEpidemiologic = 0;
+  let dElisa = 0;
+  let dTestRapid = 0;
+  let dTar = 0;
+  let dPcr = 0;
+  let dPcrProbable = 0;
+
+  // Totals Positius Homes
+  let hEpidemiologic = 0;
+  let hElisa = 0;
+  let hTestRapid = 0;
+  let hTar = 0;
+  let hPcr = 0;
+  let hPcrProbable = 0;
+
+
+
   //QUERY PARAMS: si no tenim paràmetres, mostrarem les últimes dades disponibles (2 dies anteriors)
-  if(!req.query.data){
   
     //Data 
     var data = new Date();
@@ -36,50 +46,31 @@ router.get("/", function(req,res){
     data = dd + '-' + mm + '-' + yyyy;
     dataAPI = yyyy + '-' + mm + '-' + dd + 'T00:00:00.000';
     
+     //TOTALS: Positius Dones
+     let getTotalPositiusDones = async () => {
+        let response = await axios.get(`https://analisi.transparenciacatalunya.cat/resource/xuwf-dxjd.json?abscodi=247`)
+        console.log(response.status)
+          return response;
+
+
+     }
+
     getApiData();
+    
+
     
     async function getApiData(){
 
       totalPositiusDones = await getTotalPositiusDones();
-      totalSospitososDones = await getTotalSospitososDones();
-      totalPositiusHomes = await getTotalPositiusHomes();
-      totalSospitososHomes = await getTotalSospitososHomes();
+
 
       res.render("landing", {data: data, totalPositiusDones: totalPositiusDones, totalSospitososDones: totalSospitososDones, totalPositiusHomes: totalPositiusHomes, totalSospitososHomes: totalSospitososHomes});
     }
-  
+     
 
     
 
-    //TOTALS: Positius Dones
-    function getTotalPositiusDones(){
-
-      for(var i=0; i<6; i++){
-        request({url: districtsUrls[i], json:true}, function(err, res, json){
-          if (err) {
-            throw err;
-          } else {
-            //Itera en les dades d'una certa regió
-            for(var i=0; i<json.length; i++){
-
-              //Filtra per data
-              if(json[i].data === dataAPI){
-                
-                //Positius Dones
-                if(json[i].sexedescripcio==="Dona" & json[i].resultatcoviddescripcio=="Positiu"){
-                  totalPositiusDones = totalPositiusDones + parseInt(json[i].numcasos);
-                }
-              }
-            }
-          }     
-        }  
-      )};
-      return new Promise(resolve => {
-        setTimeout(() => {
-          resolve(totalPositiusDones);
-        }, 1600);
-      });  
-    };  
+    
 
 
     //TOTALS: Sospitosos Dones
@@ -171,9 +162,9 @@ router.get("/", function(req,res){
         });  
       };
     }
-
+  
   //QUERY PARAMS: si tenim paràmetres en la query, buscarem les dades referents a la data en concret
-  else  {
+  /*
     var data = req.query.data;
     
     //TOTALS: Variables Totals Terrassa
@@ -363,6 +354,7 @@ router.get("/", function(req,res){
       return dataFormatada;
     }
   }
+});*/
 });
 
 // ROUTES EXPORT
